@@ -1,18 +1,17 @@
-#V_S sim is the file contain most simulation function within classes.
+# V_S sim is the file contain most simulation function within classes.
+# Importations
 import random
-
 import pygame as pg
 import sys
-import time
 
+# Linking files and classes
 from V_Spic import *
 from V_Senvi import Envi
-from V_Stime import Time
-from V_Ssetting import world_size, tile_size
+from V_Ssetting import world_size, tile_size, day_length
 from V_Scam import Camera
 
 class Sim():
-    def __init__(self,screen,clock): # Init method from main attributes
+    def __init__(self, screen, clock): # Init method from main attributes
         self.screen = screen
         self.clock = clock
         self.width, self.height = self.screen.get_size() # getting height and width
@@ -23,17 +22,12 @@ class Sim():
         self.camera = Camera(self.width, self.height)
 
         # Timer
-
-        self.DAY_UPDATE = pg.USEREVENT
-        pg.time.set_timer(self.DAY_UPDATE, 2000)
-        self.NIGHT_UPDATE = pg.USEREVENT
-        pg.time.set_timer(self.NIGHT_UPDATE, 3000)
-        self.day = day
         self.timer = 0
-        #self.day_length = 2000
 
+        # Initial adjustable variable states
+        self.sky_colour = day
 
-    # Running function which allows functions in Sim to be looped
+    # Running function which allows functions in Sim to be looped under the main loop
     def run(self):
         self.running = True
         while self.running:
@@ -57,17 +51,13 @@ class Sim():
                     pg.quit()
                     sys.exit()
 
-            #if event.type == self.DAY_UPDATE:
-            #    self.day_update()
-            #if event.type == self.NIGHT_UPDATE:
-            #    self.night_update()
-
             # TESTING PURPOSES (TEMP)
             #print(pg.mouse.get_focused())
 
     # Update function
+
     def update(self):
-        # Cursor window status
+        # Cursor window active status
         cursor_state = False
         if pg.mouse.get_focused():
             cursor_state = True
@@ -78,26 +68,28 @@ class Sim():
 
     # Draw function
 
-
-
-
-    #def night_update(self):
-     #   self.day = False
-
     def draw(self):
-        #if self.timer - now > 1000:
-        #    self.timer = now
-        #     day = (random.choice(sky_group))
+        self.screen.fill(self.sky_colour)
+        now = pg.time.get_ticks()
+        while (day_length - (day_length/10)) <= (now - self.timer) <= day_length:
+            self.sky_colour = night
+            self.timer = now + (day_length * 2)  # timer is shifted 2x to be ahead of now
+        while (day_length - (day_length/10)) <= (self.timer - now) <= day_length:
+            self.sky_colour = day
+            self.timer = now
 
-        #ticks = pg.time.get_ticks()  # starter tick
-        #seconds = ticks // 1000
-        #self.screen.fill(day)
-        #if ticks >= 2000:
-        #    self.screen.fill(night)
-        #    ticks = pg.time.get_ticks()
-        #if ticks >= 4000:
-        #    self.screen.fill(day)
+        """Visualisation"""
+        # First 3 seconds with day length as 1 second long
+        # timer        now        day/night ~dif1  ~dif2
+        # timer = 0    now > 0    day       0     0
+        # timer = 0    now < 1000 day       1000  -1000
+        # timer = 3000 now > 1000 night     -2000 2000
+        # timer = 3000 now < 2000 night     -1000 1000
+        # timer = 2000 now > 2000 day       0     0
+        # timer = 2000 now < 3000 day       1000  -1000
+        # timer = 5000 now > 3000 night     -2000 2000
 
+        """Group rendering"""
         self.screen.blit(self.envi.grass_group, (self.camera.scroll.x, self.camera.scroll.y))
         #self.screen.blit(self.envi.oak_tree_group, (self.camera.scroll.x, self.camera.scroll.y))
 
@@ -105,6 +97,7 @@ class Sim():
             for y in range (self.envi.gridlength_y):
                 render_coord = self.envi.envi[x][y]["render_coord"]
 
+                """Grid rendering"""
                 # Rectangle grid node
                 #node = self.envi.envi[x][y]["node_rect"]
                 #rect = pg.Rect(node[0][0], node[0][1], tile_size, tile_size)
@@ -115,17 +108,19 @@ class Sim():
                 #isonode = [(x + self.width / 2, y + self.height / 16) for x, y in isonode]
                 #pg.draw.polygon(self.screen, (0,0,0), isonode, 1) #Outline colour of the grid frame.
 
+                # Isometric topdown grid node
+                # isonodeTD = self.envi.envi[x][y]["nodeTD_poly"]
+                # isonodeTD = [(x + self.width / 2, y + self.height / 16) for x, y in isonodeTD]
+                # pg.draw.polygon(self.screen, (255, 255, 255), isonodeTD, 1)  # Outline colour of the grid frame.
+
+                """"Singular rendering"""
+
                 # Initial rendering of trees
 
                 tile = self.envi.envi[x][y]["tile"]
                 if tile != "empty":
                    self.screen.blit(self.envi.node[tile],(render_coord[0] + self.envi.grass_group.get_width() / 2 + self.camera.scroll.x,
                                                           render_coord[1] + self.height/48 + self.camera.scroll.y))
-
-                # Isometric topdown grid node
-                #isonodeTD = self.envi.envi[x][y]["nodeTD_poly"]
-                #isonodeTD = [(x + self.width / 2, y + self.height / 16) for x, y in isonodeTD]
-                #pg.draw.polygon(self.screen, (255, 255, 255), isonodeTD, 1)  # Outline colour of the grid frame.
 
                 # Grass node rendering (singular)
                 #self.screen.blit(self.envi.node["grass_node"], (render_coord[0] + self.width/2 + self.camera.scroll.x,

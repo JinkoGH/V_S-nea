@@ -1,9 +1,13 @@
-#V_Senvi will hold all code related towards the nodes and the grid system of the simulation.
+# V_Senvi will hold all code related towards the nodes and the grid system of the simulation.
+# Importations
 import pygame as pg
-from V_Ssetting import tile_size
-from V_Spic import *
 import random
 import noise
+
+# Linking files and classes
+from V_Ssetting import tile_size
+from V_Spic import *
+
 
 
 print("random values generated:")

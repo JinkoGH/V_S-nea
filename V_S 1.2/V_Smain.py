@@ -1,13 +1,10 @@
-#V_S is the main python file in which all other files will communicate with each other
-#and where the main game loop runs
-#importations
+# V_S is the main python file in which all other files will communicate with each other
+#  and where the main game loop runs
+# Importations
 import pygame as pg
-import random
 
-import pygame.time
-
+# Linking files
 from V_Ssim import Sim
-from V_Spic import day
 from V_Ssetting import screen_size
 
 def Main():

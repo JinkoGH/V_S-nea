@@ -1,5 +1,9 @@
 #V_Scam holds all the functions of the camera
+
+# Importations
 import pygame as pg
+
+# Linking files and classes
 from V_Ssetting import cam_speed, cam_screen_percent
 
 
