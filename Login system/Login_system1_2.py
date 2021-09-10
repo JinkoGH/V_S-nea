@@ -5,7 +5,7 @@ logreg_root = Tk()
 import sqlite3
 import re
 import os
-from V_Smain import *
+
 
 
 #Registration screen
@@ -189,7 +189,7 @@ def login_user():
 
 
 
-#main menu
+#----------------------------------------- Main menu
 def main_screen():
         main_root = Toplevel(logreg_root)
         main_root.title("Main menu")
@@ -201,7 +201,7 @@ def main_screen():
         Button(main_root, text="Load/create save", command = loadsavescreen,height = "1", width = "15",background ="grey", foreground ="white").pack()
         Label(main_root, text="").pack()
 
-        Button(main_root, text="Settings", height = "1", width = "15",background ="grey", foreground ="white").pack()
+        Button(main_root, text="Settings", command = load_settings ,height = "1", width = "15",background ="grey", foreground ="white").pack()
         Label(main_root, text="").pack()
 
         Button(main_root, text="Instruction", height = "1", width = "15",background ="grey", foreground ="white").pack()
@@ -211,24 +211,97 @@ def main_screen():
         Label(main_root, text="").pack()
 
         Button(main_root, text="Exit",command = main_root.destroy, height = "1", width = "15",background ="grey", foreground ="white").pack()
-#Screen for load/create saves
+
+#--------------------------------------------- Buttons for the main menu
+# Screen for load/create saves
 def loadsavescreen():
         global loadsavescreen
         loadsave_root = Toplevel(logreg_root)
         loadsave_root.title("Load/create saves")
         loadsave_root.geometry("250x300")
         #title
-        Label(loadsave_root, text="Select option", background="grey", foreground="white", height="3", width="35").pack()
+        Label(loadsave_root, text="Select an option", background="grey", foreground="white", height="3", width="35").pack()
         Label(loadsave_root, text="").pack()
         #button
 
-        #Button(loadsave_root, text="Load saves", height="1", width="17", background="grey", foreground="white").pack()
-        #Label(loadsave_root, text="").pack()
+        Button(loadsave_root, text="Load saves", height="1", width="17", background="grey", foreground="white").pack()
+        Label(loadsave_root, text="").pack()
 
-        Button(loadsave_root, text="Create save", command = opensim(), height="1", width="17", background="grey", foreground="white").pack()
+        Button(loadsave_root, text="Create save", height="1", width="17", background="grey", foreground="white").pack()
         Label(loadsave_root, text="").pack()
 
         Button(loadsave_root, text="Return to main menu", command= loadsave_root.destroy, height="1", width="17", background="grey", foreground="white").pack()
+
+
+def load_settings():
+        global load_settings
+        load_settings_root = Toplevel(logreg_root)
+        load_settings_root.title("Settings")
+        load_settings_root.geometry("250x300")
+        # title
+        Label(load_settings_root, text="Select an option", background="grey", foreground="white", height="3", width="35").pack()
+        Label(load_settings_root, text="").pack()
+        # button
+
+        Button(load_settings_root, text = "Graphical style", command=graphical_style, height="1", width="17", background="grey", foreground="white").pack()
+        Label(load_settings_root, text="").pack()
+
+        Button(load_settings_root, text="Interface theme", command=interface_theme, height="1", width="17",
+               background="grey", foreground="white").pack()
+        Label(load_settings_root, text="").pack()
+
+        Button(load_settings_root, text = "Audio", height="1", width="17", background="grey", foreground="white").pack()
+        Label(load_settings_root, text="").pack()
+
+        Button(load_settings_root, text = "Controls", height="1", width="17", background="grey", foreground="white").pack()
+        Label(load_settings_root, text="").pack()
+
+        Button(load_settings_root, text="Return to main menu", command= load_settings_root.destroy, height="1", width="17", background="grey", foreground="white").pack()
+
+def graphical_style():
+        # Setting the window
+        global graphical_style
+        graphical_style_root = Toplevel(logreg_root)
+        graphical_style_root.title("Graphical style")
+        graphical_style_root.geometry("250x300")
+        # Allowing check buttons act as variables
+        var = tk.IntVar()
+        # title
+        Label(graphical_style_root, text="Graphic style", background="grey", foreground="white", height="1",
+              width="35").pack()
+        Label(graphical_style_root, text="").pack()
+        # Radio button
+        Radiobutton(graphical_style_root, variable=var, text ="Original",
+                    height="1", width="10", background="grey", foreground="white").pack()
+        Label(graphical_style_root, text="").pack()
+        Radiobutton(graphical_style_root, variable=var, text = "Simplified",
+                    height="1", width="10", background="grey", foreground="white").pack()
+        Label(graphical_style_root, text="").pack()
+
+# Allowing radio buttons act as variables
+var = tk.IntVar()
+
+def interface_theme():
+        # Setting the window
+        global interface_theme
+        interface_theme_root = Toplevel(logreg_root)
+        interface_theme_root.title("Interface theme")
+        interface_theme_root.geometry("250x300")
+
+        # title
+        Label(interface_theme_root, text="Graphic style", background="grey", foreground="white", height="1",
+              width="35").pack()
+        Label(interface_theme_root, text="").pack()
+        # Radio button
+        Radiobutton(interface_theme_root, variable=var, text ="Light", command = light,
+                    height="1", width="10", background="grey", foreground="white").pack()
+        Label(interface_theme_root, text="").pack()
+        Radiobutton(interface_theme_root, variable=var, text = "Dark", command = light,
+                    height="1", width="10", background="grey", foreground="white").pack()
+        Label(interface_theme_root, text="").pack()
+
+def light():
+        print(var.get())
 
 #linking to the Main simulation file.
 def opensim():
