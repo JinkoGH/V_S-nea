@@ -174,13 +174,18 @@ def login_user():
                         results = cursorObj.fetchall()
                         #channeling/stopping the user though the account
                         if results:
-                                Label(log_root, text="Login success", command = mainscreen() , height="1", width="19", background="green").place(x=56,y=200)
-                                log_root.after(3000,log_root.destroy)
+                               
+                                Label(log_root, text="Login success.\nLoading main menu...", height="2", width="19", background="green").place(x=56,y=200)
+                                log_root.after(1500, mainscreen)
+                                log_root.after(10000, log_root.destroy)                
                                 break
+
                         else:
                                 Label(log_root, text="Details incorrect", height="1", width="19", background="light blue").place(x=56, y=200)
                                 break
+                                
         data_exists()
+
 
 
 
@@ -198,10 +203,10 @@ def mainscreen():
         Label(main_root, text="Vegetation simulation\nmain menu", background="grey", foreground="white", height="2", width="35").pack()
         #buttons
         Label(main_root, text="").pack()
-        Button(main_root, text="Load/create save", command = loadsavescreen ,height = "1", width = "15",background ="grey", foreground ="white").pack()
+        Button(main_root, text="Load/create save", command = loadsavescreen, height = "1", width = "15",background ="grey", foreground ="white").pack()
         Label(main_root, text="").pack()
 
-        Button(main_root, text="Settings", command = load_settings ,height = "1", width = "15",background ="grey", foreground ="white").pack()
+        Button(main_root, text="Settings", command = load_settings, height = "1", width = "15",background ="grey", foreground ="white").pack()
         Label(main_root, text="").pack()
 
         Button(main_root, text="Instruction", height = "1", width = "15",background ="grey", foreground ="white").pack()
@@ -264,19 +269,19 @@ def graphical_style():
         graphical_style_root = Toplevel(logreg_root)
         graphical_style_root.title("Graphical style")
         graphical_style_root.geometry("250x300")
-        # Allowing check buttons act as variables
-        var = IntVar()
-        var1 = IntVar()
+        # Assigning integer variable
+        v = tk.IntVar()
         # title
         Label(graphical_style_root, text="Graphic style", background="grey", foreground="white", height="1",
               width="35").pack()
         Label(graphical_style_root, text="").pack()
         # Radio button
-        CheckButton(graphical_style_root, variable=var, text ="Original",
-                    height="1", width="10", background="grey", foreground="white").pack()
-        Label(graphical_style_root, text="").pack()
-        CheckButton(graphical_style_root, variable=var2, text = "Simplified",
-                    height="1", width="10", background="grey", foreground="white").pack()
+        graphical_original = Radiobutton(graphical_style_root, text = "Original", variable = v, value = 0,
+                                         height="1", width="10", background="grey", foreground="white")
+        graphical_original.pack()
+        graphical_simplified = Radiobutton(graphical_style_root, text = "Simplified", variable = v, value = 1,
+                                           height="1", width="10", background="grey", foreground="white")
+        graphical_simplified.pack()
         Label(graphical_style_root, text="").pack()
 
 # Allowing radio buttons act as variables
@@ -288,20 +293,22 @@ def interface_theme():
         interface_theme_root = Toplevel(logreg_root)
         interface_theme_root.title("Interface theme")
         interface_theme_root.geometry("250x300")
-
+        # Assigning integer variables
+        v = tk.IntVar()
         # title
         Label(interface_theme_root, text="Graphic style", background="grey", foreground="white", height="1",
               width="35").pack()
         Label(interface_theme_root, text="").pack()
         # Radio button
-        Radiobutton(interface_theme_root, variable=var, text ="Light", command = light,
-                    height="1", width="10", background="grey", foreground="white").pack()
-        Label(interface_theme_root, text="").pack()
-        Radiobutton(interface_theme_root, variable=var, text = "Dark", command = light,
-                    height="1", width="10", background="grey", foreground="white").pack()
-        Label(interface_theme_root, text="").pack()
+        theme_light = Radiobutton(graphical_style_root, text = "light", variable = v, value = 0,
+                                         height="1", width="10", background="grey", foreground="white")
+        theme_original.pack()
+        theme_dark = Radiobutton(graphical_style_root, text = "dark", variable = v, value = 1,
+                                           height="1", width="10", background="grey", foreground="white")
+        theme_dark.pack()
 
-
+def light():
+        print(var.get())
 
 #linking to the Main simulation file.
 def opensim():
