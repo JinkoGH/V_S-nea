@@ -237,7 +237,7 @@ def loadsavescreen():
 
         Button(loadsave_root, text="Return to main menu", command= loadsave_root.destroy, height="1", width="17", background="grey", foreground="white").pack()
 
-
+#=---------------------------------------------------------Buttons for setting
 def load_settings():
         global load_settings
         load_settings_root = Toplevel(logreg_root)
@@ -261,7 +261,7 @@ def load_settings():
         Button(load_settings_root, text = "Controls", height="1", width="17", background="grey", foreground="white").pack()
         Label(load_settings_root, text="").pack()
 
-        Button(load_settings_root, text="Return to main menu", command= load_settings_root.destroy, height="1", width="17", background="grey", foreground="white").pack()
+        Button(load_settings_root, text="Return to main menu", command = load_settings_root.destroy, height="1", width="17", background="grey", foreground="white").pack()
 
 def graphical_style():
         # Setting the window
@@ -279,13 +279,12 @@ def graphical_style():
         graphical_original = Radiobutton(graphical_style_root, text = "Original", variable = v, value = 0,
                                          height="1", width="10", background="grey", foreground="white")
         graphical_original.pack()
+       
         graphical_simplified = Radiobutton(graphical_style_root, text = "Simplified", variable = v, value = 1,
                                            height="1", width="10", background="grey", foreground="white")
         graphical_simplified.pack()
+        
         Label(graphical_style_root, text="").pack()
-
-# Allowing radio buttons act as variables
-var = tk.IntVar()
 
 def interface_theme():
         # Setting the window
@@ -296,16 +295,16 @@ def interface_theme():
         # Assigning integer variables
         v = tk.IntVar()
         # title
-        Label(interface_theme_root, text="Graphic style", background="grey", foreground="white", height="1",
+        Label(interface_theme_root, text="Interface themes", background="grey", foreground="white", height="1",
               width="35").pack()
         Label(interface_theme_root, text="").pack()
         # Radio button
-        theme_light = Radiobutton(graphical_style_root, text = "light", variable = v, value = 0,
-                                         height="1", width="10", background="grey", foreground="white")
-        theme_original.pack()
-        theme_dark = Radiobutton(graphical_style_root, text = "dark", variable = v, value = 1,
-                                           height="1", width="10", background="grey", foreground="white")
+        theme_light = Radiobutton(interface_theme_root, text = "light", variable = v, value = 0, indicatoron = 0, height="1", width="10", background="grey", foreground="white")
+        theme_light.pack()
+        theme_dark = Radiobutton(interface_theme_root, text = "dark", variable = v, value = 1, indicatoron = 0, height="1", width="10", background="grey", foreground="white")
         theme_dark.pack()
+
+        Button(interface_theme_root, text="Return to settings", command = interface_theme_root.destroy, height="1", width="17", background="grey", foreground="white").pack()
 
 def light():
         print(var.get())
