@@ -71,10 +71,10 @@ class Sim():
     def draw(self):
         self.screen.fill(self.sky_colour)
         now = pg.time.get_ticks()
-        while (day_length - (day_length/10)) <= (now - self.timer) <= day_length:
+        while (day_length - 50) <= (now - self.timer) <= day_length:
             self.sky_colour = night
             self.timer = now + (day_length * 2)  # timer is shifted 2x to be ahead of now
-        while (day_length - (day_length/10)) <= (self.timer - now) <= day_length:
+        while (day_length - 50) <= (self.timer - now) <= day_length:
             self.sky_colour = day
             self.timer = now
 
