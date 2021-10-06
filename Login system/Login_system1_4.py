@@ -1,32 +1,33 @@
 #imports
 from tkinter import *
+from tkinter import ttk
+
 import sqlite3
 import os
 
 root = Tk()
 
-class GUI:
-        def __init__(self, root, screensize, title, label, button):
+class logreg_screen:
+        #First screen 
+        def __init__(self, root ):
                 # Login and register screen
                 self.root = root
-                self.screensize = root.geometry
-                self.title = self.root.title
-                self.label = Label(root)
-                self.button = Button(root)
-                self.root.mainloop()
-        def logreg_screen():
-                root.geometry("500x1000")
-                self.title("Vegetation simulation")
+                self.titlesize =("1000x600")
+               
+
+        def logregscreen():
+                logreg_root.geometry(self.titlesize)
+                logreg_root.title("Vegetation simulation")
                 Label(text = "Vegetation simulation\nuser portal", background ="grey", foreground ="white" ,height = "2", width = "35").pack()
                 #buttons
-                self.label(text="").pack()
-                self.button(text = "Login" , height = "1", width = "15",background ="grey", foreground ="white").pack()
+                Label(text="").pack()
+                Button(text = "Login", command = login_screen, height = "1", width = "15",background ="grey", foreground ="white").pack()
 
-                self.label(text= "").pack()
-                self.button(text = "Register" , height = "1", width = "15", background ="grey", foreground ="white").pack()
-
-                self.label(text="").pack()
-                self.button(text="Exit program", command= logreg_root.destroy, height="1", width="15", background ="grey", foreground ="white").pack()
+                Label(text= "").pack()
+                Button(text = "Register", command = register_screen, height = "1", width = "15", background ="grey", foreground ="white").pack()
+        
+                Label(text="").pack()
+                Button(text="Exit program", command= logreg_root.destroy, height="1", width="15", background ="grey", foreground ="white").pack()
 
                 logreg_root.mainloop()
                 
