@@ -1,10 +1,18 @@
 #imports
 from tkinter import *
-import tkinter as tk
+from tkinter import ttk
+
 logreg_root = Tk()
 import sqlite3
 import re
 import os
+
+# Theme and customization of the gui
+style = ttk.Style()
+style.configure("DarkTheme", background ="grey", foreground = "white")
+style.configure("DarkTheme", background ="white", foreground = "grey")
+
+titlesize =("500x600")
 
 
 
@@ -272,7 +280,7 @@ def graphical_style():
         # Assigning integer variable
         v = tk.IntVar()
         # title
-        Label(graphical_style_root, text="Graphic style", background="grey", foreground="white", height="1",
+        Label(graphical_style_root, text="Graphic style", background="grey", foreground="white", height="3",
               width="35").pack()
         Label(graphical_style_root, text="").pack()
         # Radio button
@@ -289,19 +297,19 @@ def graphical_style():
 def interface_theme():
         # Setting the window
         global interface_theme
-        interface_theme_root = Toplevel(logreg_root)
+        interface_theme_root = Toplevel()
         interface_theme_root.title("Interface theme")
         interface_theme_root.geometry("250x300")
         # Assigning integer variables
         v = tk.IntVar()
         # title
-        Label(interface_theme_root, text="Interface themes", background="grey", foreground="white", height="1",
+        Label(interface_theme_root, text="Interface themes", background="grey", foreground="white", height="3",
               width="35").pack()
         Label(interface_theme_root, text="").pack()
         # Radio button
-        theme_light = Radiobutton(interface_theme_root, text = "light", variable = v, value = 0, indicatoron = 0, height="1", width="10", background="grey", foreground="white")
+        theme_light = Radiobutton(interface_theme_root, text = "light", variable = v, value = 0, indicatoron = 0 ,height="1", width="10", background="grey")
         theme_light.pack()
-        theme_dark = Radiobutton(interface_theme_root, text = "dark", variable = v, value = 1, indicatoron = 0, height="1", width="10", background="grey", foreground="white")
+        theme_dark = Radiobutton(interface_theme_root, text = "dark", variable = v, value = 1, indicatoron = 0, height="1", width="10", background="grey")
         theme_dark.pack()
 
         Button(interface_theme_root, text="Return to settings", command = interface_theme_root.destroy, height="1", width="17", background="grey", foreground="white").pack()
@@ -318,18 +326,18 @@ def opensim():
 #Registation and login in screen
 def logreg_screen():
         global logreg_root
-        logreg_root.geometry("500x600")
+        logreg_root.geometry(titlesize)
         logreg_root.title("Vegetation simulation")
-        Label(text = "Vegetation simulation\nuser portal", background ="grey", foreground ="white" ,height = "2", width = "35").pack()
+        Label(text = "Vegetation simulation\nuser portal", style = DarkTheme, height = "2", width = "35").pack()
         #buttons
         Label(text="").pack()
-        Button(text = "Login", command = login_screen, height = "1", width = "15",background ="grey", foreground ="white").pack()
+        Button(text = "Login", command = login_screen, style = DarkTheme, height = "1", width = "15").pack()
 
         Label(text= "").pack()
-        Button(text = "Register", command = register_screen, height = "1", width = "15", background ="grey", foreground ="white").pack()
+        Button(text = "Register", command = register_screen, style = DarkTheme, height = "1", width = "15").pack()
 
         Label(text="").pack()
-        Button(text="Exit program", command= logreg_root.destroy, height="1", width="15", background ="grey", foreground ="white").pack()
+        Button(text="Exit program", command= logreg_root.destroy, style = DarkTheme ,height="1", width="15").pack()
 
         logreg_root.mainloop()
 
