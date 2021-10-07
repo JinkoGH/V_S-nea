@@ -1,6 +1,5 @@
 #imports
 from tkinter import *
-from tkinter import ttk
 
 logreg_root = Tk()
 import sqlite3
@@ -8,10 +7,9 @@ import re
 import os
 
 # Theme and customization of the gui
-style = ttk.Style()
-style.configure("DarkTheme", background ="grey", foreground = "white")
-style.configure("DarkTheme", background ="white", foreground = "grey")
-
+#style = ttk.Style()
+#style.configure("DarkTheme", background ="grey", foreground = "white")
+#style.configure("DarkTheme", background ="white", foreground = "grey")
 titlesize =("500x600")
 
 
@@ -328,16 +326,16 @@ def logreg_screen():
         global logreg_root
         logreg_root.geometry(titlesize)
         logreg_root.title("Vegetation simulation")
-        Label(text = "Vegetation simulation\nuser portal", style = DarkTheme, height = "2", width = "35").pack()
+        Label(text = "Vegetation simulation\nuser portal", background="grey", foreground="white", height = "2", width = "35").pack()
         #buttons
         Label(text="").pack()
-        Button(text = "Login", command = login_screen, style = DarkTheme, height = "1", width = "15").pack()
+        Button(text = "Login", command = login_screen,background="grey", foreground="white", height = "1", width = "15").pack()
 
         Label(text= "").pack()
-        Button(text = "Register", command = register_screen, style = DarkTheme, height = "1", width = "15").pack()
+        Button(text = "Register", command = register_screen,background="grey", foreground="white", height = "1", width = "15").pack()
 
         Label(text="").pack()
-        Button(text="Exit program", command= logreg_root.destroy, style = DarkTheme ,height="1", width="15").pack()
+        Button(text="Exit program", command= logreg_root.destroy, background="grey", foreground="white",height="1", width="15").pack()
 
         logreg_root.mainloop()
 
