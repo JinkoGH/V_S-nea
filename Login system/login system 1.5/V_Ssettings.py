@@ -1,4 +1,5 @@
-# Preset integers for size of widgets in the program
+"""Preset integers for size of widgets in the program"""
+"""not part of any level"""
 
 # screen sizes
 screen_size = ("500x500")

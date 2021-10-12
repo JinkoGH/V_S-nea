@@ -1,9 +1,10 @@
+"""Registration screen for user to register and create an account on the database"""
+"""level2"""
 #imports
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
 import re
-import os
 
 # Getting preset integers
 from V_Ssettings import *
@@ -27,23 +28,23 @@ class Reg_screen:
         self.space = tk.Label(self.frame, text="").grid(row=1)
 
         # buttons and inputs
-        self.label = tk.Label(self.frame, text="Username", height=labelH, width=labelW,
-                              background="grey", foreground="white").grid(row=2)
+        self.label = tk.Label(self.frame, text="Username",
+                              background="grey", foreground="white", height=labelH, width=labelW).grid(row=2)
         self.username_entry = tk.Entry(self.frame, textvariable=self.username)
         self.username_entry.grid(row=3)
         self.space = tk.Label(self.frame, text="").grid(row=4)
         self.label = tk.Label(self.frame, text="Password",
-                              height=labelH, width=labelW, background="grey", foreground="white").grid(row=5)
+                              background="grey", foreground="white", height=labelH, width=labelW).grid(row=5)
         self.password_entry = tk.Entry(self.frame, textvariable=self.password)
         self.password_entry.grid(row=6)
         self.space = tk.Label(self.frame, text="").grid(row=7)
         # submit details button
         self.button = tk.Button(self.frame, text="Register", command=self.register_user,
-                                height=buttonH, width=buttonW, background="grey", foreground="white").grid(row=8)
+                                background="grey", foreground="white", height=buttonH, width=buttonW,).grid(row=8)
         # assistance button
         self.label = tk.Label(self.frame, text="").grid(row=9)
-        self.assistbutton = tk.Button(self.frame, text="Instructions",
-                                      height=buttonH, width=buttonW, background="blue", foreground="white").grid(row=10)
+        self.assistbutton = tk.Button(self.frame, text="Instructions", command=self.openinstruction,
+                                      background="blue", foreground="white", height=buttonH, width=buttonW).grid(row=10)
         # Return back to hub
         self.label = tk.Label(self.frame, text="").grid(row=12)
         self.button = tk.Button(self.frame, text="Return", command=self.close_screen,
@@ -125,9 +126,13 @@ class Reg_screen:
             data_insert(con, entities)
             # success message
             self.sucesslabel = tk.Label(self.frame, text="Success",
-                                        height=labelH, width=labelW2, background="green").grid(row=11)
-            self.frame.after(4000, self.frame.destroy)
+                                        height=labelH2, width=labelW2, background="green").grid(row=11)
+            self.frame.after(4000, self.close_screen)
+            
+    # Function for opening instruction page
+    def openinstruction(self):
+        pass
 
-    # Exit button
+    # Closing function
     def close_screen(self):
         self.master.destroy()

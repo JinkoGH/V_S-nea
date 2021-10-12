@@ -1,3 +1,5 @@
+"""Initial/base screen and TopRoot"""
+"""level1"""
 # imports
 import tkinter as tk
 from tkinter import ttk
@@ -30,9 +32,8 @@ class LogReg_screen():
         self.space = tk.Label(text="").grid(row=5)
         self.button = tk.Button(text="Exit program", command=self.close_screen,
                                 background="grey", foreground="white", height=buttonH, width=buttonW).grid(row=6)
-        self.frame.grid()
 
-    # functions for buttons to open windows
+    # Functions assigned to buttons to open windows
     def openreg_screen(self):
         self.openreg_screen = tk.Toplevel(self.master)
         self.app = Reg_screen(self.openreg_screen)
