@@ -12,9 +12,11 @@ titleW = "71"
 # BUTTON
 # height
 buttonH = "1"
+radioH = "1"
 # width
 buttonW = "17"
 buttonW2 = "27"
+radioW = "17"
 
 # LABEL
 # height
@@ -23,4 +25,6 @@ labelH2 = "2"
 # width
 labelW = "17"
 labelW2 = "27"
+
+
 

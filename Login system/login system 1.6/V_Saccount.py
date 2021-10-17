@@ -4,6 +4,7 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
+import re
 
 
 # Getting preset integers
@@ -15,7 +16,7 @@ from V_Smain import Main_screen
 
 
 
-class Log_screen:
+class Log_screen():
     def __init__(self, master):
         self.master = master
         self.master.geometry(screen_size)
@@ -29,28 +30,28 @@ class Log_screen:
 
         # title
         self.master.title("Login page")
-        self.title = tk.Label(self.frame, text="Enter account details to proceed",
+        self.title = tk.Label(master, text="Enter account details to proceed",
                               background="grey", foreground="white", height=titleH, width=titleW).grid(row=0, column=0)
-        self.space = tk.Label(self.frame, text="").grid(row=1)
+        self.space = tk.Label(master, text="").grid(row=1)
 
         # buttons and inputs
-        self.label = tk.Label(self.frame, text="Username",
+        self.label = tk.Label(master, text="Username",
                               background="grey", foreground="white", height=labelH, width=labelW,).grid(row=2)
-        self.username_entry = tk.Entry(self.frame, textvariable=self.username1)
+        self.username_entry = tk.Entry(master, textvariable=self.username1)
         self.username_entry.grid(row=3)
-        self.space = tk.Label(self.frame, text="").grid(row=4)
-        self.label = tk.Label(self.frame, text="Password",
+        self.space = tk.Label(master, text="").grid(row=4)
+        self.label = tk.Label(master, text="Password",
                               background="grey", foreground="white", height=labelH, width=labelW).grid(row=5)
-        self.password_entry = tk.Entry(self.frame, textvariable=self.password1)
+        self.password_entry = tk.Entry(master, textvariable=self.password1)
         self.password_entry.grid(row=6)
-        self.space = tk.Label(self.frame, text="").grid(row=7)
+        self.space = tk.Label(master, text="").grid(row=7)
 
         # Button to submit details and login in
-        self.button = tk.Button(self.frame, text="Login in", command=self.login_user,
+        self.button = tk.Button(master, text="Login in", command=self.login_user,
                                 background="grey", foreground="white", height=buttonH, width=buttonW,).grid(row=8)
         # Return back to hub
-        self.label = tk.Label(self.frame, text="").grid(row=10)
-        self.button = tk.Button(self.frame, text="Return", command=self.close_screen,
+        self.label = tk.Label(master, text="").grid(row=10)
+        self.button = tk.Button(master, text="Return", command=self.close_screen,
                                 background="grey", foreground="white", height=buttonH, width=buttonW).grid(row=11)
 
     def login_user(self):
@@ -69,13 +70,13 @@ class Log_screen:
                 results = cursorObj.fetchall()
                 # Deciding whether the user should proceed or not
                 if results:
-                    self.label = tk.Label(self.frame, text="Login success.\nLoading main menu...",
+                    self.label = tk.Label(self.master, text="Login success.\nLoading main menu...",
                                           background="green", height=labelH2, width=labelW).grid(row=9)
                     self.master.after(1500, self.openmain_screen)
                     break
 
                 else:
-                    self.label = tk.Label(self.frame, text="Details incorrect",
+                    self.label = tk.Label(self.master, text="Details incorrect",
                                           background="light blue", height=labelH2, width=labelW).grid(row=9)
                     break
         data_exists()
@@ -90,13 +91,14 @@ class Log_screen:
         self.master.destroy()
 
 # Registration screen
-class Reg_screen:
+class Reg_screen():
 
     def __init__(self, master):
         self.master = master
         self.master.geometry(screen_size)
         self.frame = tk.Frame(self.master)
         self.frame.grid()
+
 
         # Defining string/text variables
         self.username = tk.StringVar()
