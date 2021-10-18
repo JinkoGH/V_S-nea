@@ -10,7 +10,7 @@ import re
 # Getting preset integers
 from V_Ssettings import *
 # Conneting to the main screen
-from V_Sinstruction1 import RegInstruction_screen
+#from V_Sinstruction1 import RegInstruction_screen
 from V_Smain import Main_screen
 
 

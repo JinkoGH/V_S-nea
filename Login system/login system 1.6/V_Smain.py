@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # Importing classes
-from V_Ssetting import Setting, InterfaceSet
+from V_Ssetting import Setting#, InterfaceSet
 # Getting preset integers
 from V_Ssettings import *
 
