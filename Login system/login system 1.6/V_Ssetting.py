@@ -38,9 +38,6 @@ class Setting():
     # Functions assigned to buttons to open other screens
     def open_graphicalset(self):
         pass
-    def open_interfaceset(self):
-        self.open_interfaceset = tk.Toplevel(self.master)
-        self.app = InterfaceSet(self.open_interfaceset)
     def open_audioset(self):
         pass
     def open_controlset(self):

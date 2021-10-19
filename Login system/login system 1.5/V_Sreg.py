@@ -128,7 +128,7 @@ class Reg_screen:
             self.sucesslabel = tk.Label(self.frame, text="Success",
                                         height=labelH2, width=labelW2, background="green").grid(row=11)
             self.frame.after(4000, self.close_screen)
-            
+
     # Function for opening instruction page
     def openinstruction(self):
         pass

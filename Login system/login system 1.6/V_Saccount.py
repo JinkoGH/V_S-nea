@@ -16,8 +16,9 @@ from V_Smain import Main_screen
 
 
 
-class Log_screen():
+class Log_screen:
     def __init__(self, master):
+
         self.master = master
         self.master.geometry(screen_size)
         self.frame = tk.Frame(self.master)
@@ -31,28 +32,37 @@ class Log_screen():
         # title
         self.master.title("Login page")
         self.title = tk.Label(master, text="Enter account details to proceed",
-                              background="grey", foreground="white", height=titleH, width=titleW).grid(row=0, column=0)
-        self.space = tk.Label(master, text="").grid(row=1)
+                              bg="grey", fg="white", height=titleH, width=titleW)
+        self.title.grid(row=0)
+        self.space = tk.Label(master, text="")
+        self.space.grid(row=1)
 
         # buttons and inputs
         self.label = tk.Label(master, text="Username",
-                              background="grey", foreground="white", height=labelH, width=labelW,).grid(row=2)
+                              bg="grey", fg="white", height=labelH, width=labelW,)
+        self.label.grid(row=2)
         self.username_entry = tk.Entry(master, textvariable=self.username1)
         self.username_entry.grid(row=3)
-        self.space = tk.Label(master, text="").grid(row=4)
-        self.label = tk.Label(master, text="Password",
-                              background="grey", foreground="white", height=labelH, width=labelW).grid(row=5)
+        self.space1 = tk.Label(master, text="")
+        self.space1.grid(row=4)
+        self.label1 = tk.Label(master, text="Password",
+                               bg="grey", fg="white", height=labelH, width=labelW)
+        self.label1.grid(row=5)
         self.password_entry = tk.Entry(master, textvariable=self.password1)
         self.password_entry.grid(row=6)
-        self.space = tk.Label(master, text="").grid(row=7)
+        self.space2 = tk.Label(master, text="")
+        self.space2.grid(row=7)
 
         # Button to submit details and login in
         self.button = tk.Button(master, text="Login in", command=self.login_user,
-                                background="grey", foreground="white", height=buttonH, width=buttonW,).grid(row=8)
+                                bg="grey", fg="white", height=buttonH, width=buttonW,)
+        self.button.grid(row=8)
         # Return back to hub
-        self.label = tk.Label(master, text="").grid(row=10)
-        self.button = tk.Button(master, text="Return", command=self.close_screen,
-                                background="grey", foreground="white", height=buttonH, width=buttonW).grid(row=11)
+        self.space3 = tk.Label(master, text="")
+        self.space3.grid(row=10)
+        self.quit = tk.Button(master, text="Return", command=self.close_screen,
+                                bg="grey", fg="white", height=buttonH, width=buttonW)
+        self.quit.grid(row=11)
 
     def login_user(self):
         # creating string.var
@@ -215,8 +225,36 @@ class Reg_screen():
     # Function for opening instruction page
     def openinstruction(self):
         self.openinstruction = tk.Toplevel(self.master)
-        self.app = RegInstruction_screen(self.openinstruction)
+        self.app = Reg_screen(self.openinstruction)
 
     # Closing function
+    def close_screen(self):
+        self.master.destroy()
+
+class RegInstruction_screen:
+
+    def __init__(self, master):
+        self.master = master
+        self.master.geometry(screen_size)
+        self.frame = tk.Frame(self.master)
+        self.frame.grid()
+        # Main title
+        self.title = tk.Label(self.frame, text="Follow the requirements",
+                              background="grey", foreground="white", height=titleH, width=titleW).grid(row=0)
+        self.space = tk.Label(self.frame, text="").grid(row=1)
+        # Username
+        self.label = tk.Label(self.frame,text="Username requirements",
+                              background="grey",foreground="white", height=labelH, width=labelW2).grid(row=2)
+        self.label = tk.Label(self.frame, justify=tk.LEFT, text="-Username length must be 4-16\n-Username should not include space").grid(row=3)
+        self.space = tk.Label(self.frame, text="").grid(row=4)
+        # Password
+        self.label = tk.Label(self.frame, text="Password requirements",
+                              background="grey",foreground="white", height=labelH, width=labelW2).grid(row=5)
+        self.label = tk.Label(self.frame, justify=tk.LEFT, text="-Password length must be 4-16\n-Password must include both capital\n and lowercase letters\n-Password must include numbers\n-Password should not have any spaces").grid(row=6)
+        self.space = tk.Label(self.frame, text="").grid(row=7)
+        self.button = tk.Button(self.frame, text="Return", command=self.close_screen,
+                                background="grey", foreground="white", height=buttonH, width=buttonW2).grid(row=8)
+
+    # Exit button
     def close_screen(self):
         self.master.destroy()

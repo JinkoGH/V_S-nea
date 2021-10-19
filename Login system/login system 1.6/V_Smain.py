@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # Importing classes
-from V_Ssetting import Setting#, InterfaceSet
+from V_Ssetting import Setting
 # Getting preset integers
 from V_Ssettings import *
 
@@ -79,17 +79,17 @@ class LoadCreateSave():
         self.title = tk.Label(self.frame, text="Select an option",
                               bg="grey", fg="white", height=titleH, width=titleW)
         self.title.grid(row=0)
-        self.space = tk.Label(self.frame, text="").grid(row=1)
+        self.space = tk.Label(self.frame, text="")
         self.space.grid(row=1)
         # button
         self.button = tk.Button(self.frame, text="Load saves", command=self.loadsaves,
                                 bg="grey", fg="white", height=buttonH, width=buttonW)
-        self.space1 = tk.Label(self.frame, text="").grid(row=3)
+        self.space1 = tk.Label(self.frame, text="")
         self.space1.grid(row=3)
         self.button1 = tk.Button(self.frame, text="Create save", command=self.createsaves,
                                  bg="grey", fg="white", height=buttonH, width=buttonW)
         self.button1.grid(row=4)
-        self.space2 = tk.Label(self.frame, text="").grid(row=5)
+        self.space2 = tk.Label(self.frame, text="")
         self.space2.grid(row=5)
         self.button2 = tk.Button(self.frame, text="Return to main menu", command=self.close_screen,
                                  bg="grey", fg="white", height=buttonH, width=buttonW)
