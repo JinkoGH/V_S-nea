@@ -8,6 +8,7 @@ from tkinter import ttk
 from V_Saccount import Log_screen, Reg_screen
 from V_Smain import Main_screen, LoadCreateSave
 from V_Ssetting import Setting
+#screen_size = ("500x500")
 
 # Getting preset integers
 from V_Ssettings import *
@@ -91,8 +92,9 @@ class Userhub_screen:
         self.button1.config(fg="black")
         self.quit.config(bg="grey", fg="black")
         # Linking other classes to access their attributes
+        # self.log_screen = Log_screen(self)
 
-        # External windows
+        # #External windows
         # self.log_screen.master.config(bg="black")
         # self.log_screen.space.config(bg="black")
         # self.log_screen.label.config(bg="grey", fg="black")
