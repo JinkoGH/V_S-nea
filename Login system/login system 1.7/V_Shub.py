@@ -35,8 +35,8 @@ class App(tk.Tk):
         # Displaying the user hub screen as the default initial screen
         self.display_frame("Userhub_screen")
 
-    def get_frame(self, frame_class):
-        frame = self.frames[frame_class]
+    def get_frame(self, frame_name):
+        frame = self.frames[frame_name]
         return frame
 
     def display_frame(self, frame_name):
@@ -74,7 +74,7 @@ class Userhub_screen(tk.Frame):
         self.quit = tk.Button(self, text="Exit program", command=self.close_screen,
                               bg="grey", fg="white", height=buttonH, width=buttonW)
         # Empty space
-        self.space4 = tk.Label(self, text="", bg="white", pady=70)
+        self.space4 = tk.Label(self, text="", bg="white", pady=80)
 
         # Grid the widgets
         self.title.grid(row=0)
@@ -89,7 +89,7 @@ class Userhub_screen(tk.Frame):
         self.button3.grid(row=7)
         self.quit.grid(row=9)
 
-        self.log_screen = self.controller.get_frame(Log_screen)
+        self.log_screen = self.controller.get_frame("Log_screen")
     # Interface drop down menu
     # def my_menu(self, root):
     #     my_menu = tk.Menu(root)
@@ -109,6 +109,7 @@ class Userhub_screen(tk.Frame):
         self.space1.config(bg="white")
         self.space2.config(bg="white")
         self.space3.config(bg="white")
+        self.space4.config(bg="white")
         self.button.config(fg="white")
         self.button1.config(fg="white")
         self.button2.config(fg="white")
@@ -124,6 +125,7 @@ class Userhub_screen(tk.Frame):
         self.space1.config(bg="black")
         self.space2.config(bg="black")
         self.space3.config(bg="black")
+        self.space4.config(bg="black")
         self.button.config(fg="black")
         self.button1.config(fg="black")
         self.button2.config(fg="black")

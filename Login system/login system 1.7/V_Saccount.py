@@ -20,6 +20,7 @@ class Log_screen(tk.Frame):
     def __init__(self, master, controller):
         tk.Frame.__init__(self, master)
         self.controller = controller
+        
         # Defining string/text variables
         self.username1 = tk.StringVar()
         self.password1 = tk.StringVar()
@@ -99,16 +100,16 @@ class Log_screen(tk.Frame):
         password_loginfo = self.password1.get()
 
         con = sqlite3.connect('User database.db')
-
+        #
         def data_exists():
             while True:
-                # reading the database
+                # Reading the database
                 cursorObj = con.cursor()
                 find_user1 = ("SELECT * FROM Userdetails WHERE Username = ? AND Password = ?")
                 cursorObj.execute(find_user1, [(username_loginfo), (password_loginfo)])
                 results = cursorObj.fetchall()
-                # Deciding whether the user should proceed or not
-                if results:
+                # Validation process and choosing the user should proceed or not
+                if results:       
                     success_message = tk.Label(self, text="Login success.\nLoading main menu...",
                                                bg="green", height=labelH2, width=labelW)
                     success_message.grid(row=9)
@@ -120,12 +121,12 @@ class Log_screen(tk.Frame):
                                             bg="light blue", height=labelH2, width=labelW)
                     fail_message.grid(row=9)
                     break
+        # Running the while loop when login_user function is called
         data_exists()
 
     # Function for opening the main screen
     def openmain_screen(self):
-        self.openmain_screen = tk.Toplevel(self.master)
-        self.app = Main_screen(self.openmain_screen)
+        self.controller.display_frame("Main_screen")
 
     # Closing function
     def close_screen(self):
