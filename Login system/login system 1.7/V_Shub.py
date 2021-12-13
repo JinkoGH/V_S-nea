@@ -24,7 +24,7 @@ class App(tk.Tk):
         # Attribute to hold the list of names of frames
         self.frames = {}
         # Creating classes and creating instances
-        for F in (Userhub_screen, Log_screen, Reg_screen, RegInstruction_screen, Main_screen):
+        for F in (Userhub_screen, Log_screen, Reg_screen, RegInstruction_screen, Main_screen, LoadCreateSave):
             frame_name = F.__name__
             frame = F(master=base_frame, controller=self)
             self.frames[frame_name] = frame
@@ -116,6 +116,7 @@ class Userhub_screen(tk.Frame):
         self.reg = self.controller.get_frame("Reg_screen")
         self.reginstruction = self.controller.get_frame("RegInstruction_screen")
         self.main = self.controller.get_frame("Main_screen")
+        self.LCS = self.controller.get_frame("LoadCreateSave")
         # Userhub frame
         self.bg.config(image=self.light_bg)
         self.title.config(bg="grey", fg="white")
@@ -177,6 +178,15 @@ class Userhub_screen(tk.Frame):
         self.main.button2.config(fg="white")
         self.main.button3.config(fg="white")
         self.main.return_button.config(fg="white")
+        # LoadCreateSave screen
+        self.LCS.bg.config(image=self.light_bg)
+        self.LCS.title.config(bg="grey", fg="white")
+        self.LCS.space.config(bg="white")
+        self.LCS.space1.config(bg="white")
+        self.LCS.space2.config(bg="white")
+        self.LCS.button.config(fg="white")
+        self.LCS.button1.config(fg="white")
+        self.LCS.return_button.config(fg="white")
 
     def dark_theme(self):
         # Getting references to other classes
@@ -184,6 +194,7 @@ class Userhub_screen(tk.Frame):
         self.reg = self.controller.get_frame("Reg_screen")
         self.reginstruction = self.controller.get_frame("RegInstruction_screen")
         self.main = self.controller.get_frame("Main_screen")
+        self.LCS = self.controller.get_frame("LoadCreateSave")
         # Userhub frame
         self.bg.config(image=self.dark_bg)
         self.title.config(fg="black")
@@ -245,6 +256,16 @@ class Userhub_screen(tk.Frame):
         self.main.button2.config(fg="black")
         self.main.button3.config(fg="black")
         self.main.return_button.config(fg="black")
+        # LoadCreateSave screen
+        self.LCS.bg.config(image=self.dark_bg)
+        self.LCS.bg.config(image=self.light_bg)
+        self.LCS.title.config(fg="black")
+        self.LCS.space.config(bg="black")
+        self.LCS.space1.config(bg="black")
+        self.LCS.space2.config(bg="black")
+        self.LCS.button.config(fg="black")
+        self.LCS.button1.config(fg="black")
+        self.LCS.return_button.config(fg="black")
 
     # Functions assigned to buttons switch frames
     def openlog_screen(self):
