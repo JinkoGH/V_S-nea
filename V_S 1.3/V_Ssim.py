@@ -10,24 +10,24 @@ from V_Senvi import Envi
 from V_Ssetting import world_size, tile_size, day_length
 from V_Scam import Camera
 
+
 class Sim():
-    def __init__(self, screen, clock): # Init method from main attributes
+    def __init__(self, screen, clock):  # Init method from main attributes
         self.screen = screen
         self.clock = clock
-        self.width, self.height = self.screen.get_size() # getting height and width
+        self.width, self.height = self.screen.get_size()  # getting height and width
         # Limitation and size of the world
         self.envi = Envi(world_size, world_size, self.width, self.height)
 
         # Camera variables
         self.camera = Camera(self.width, self.height)
 
-        # Timer
+        # Time variables
         self.timer = 0
+        self.cooldown = 0
 
         # Initial adjustable variable states
         self.sky_colour = day
-
-
 
     # Running function which allows functions in Sim to be looped under the main loop
     def run(self):
@@ -37,8 +37,6 @@ class Sim():
             self.events()
             self.update()
             self.draw()
-
-
 
     # Program event loop
 
@@ -53,7 +51,7 @@ class Sim():
                     sys.exit()
 
             # TESTING PURPOSES (TEMP)
-            #print(pg.mouse.get_focused())
+            # print(pg.mouse.get_focused())
 
     # Update function
 
@@ -78,17 +76,7 @@ class Sim():
             self.timer = now + (day_length * 2)  # timer is shifted 2x to be ahead of now
         while (day_length - 100) <= (self.timer - now) <= day_length:
             self.sky_colour = day
-            # new entity created here
-            r = random.randint(1, 2)
-            if r == 1:
-                new_entity = "oak_tree"
-            else:
-                new_entity = "empty"
             self.timer = now
-            dictionary2 = {
-                "new_entity": new_entity
-            }
-            return dictionary2
 
         """Visualisation"""
         # First 3 seconds with day length as 1 second long
@@ -103,22 +91,22 @@ class Sim():
 
         """Group rendering"""
         self.screen.blit(self.envi.grass_group, (self.camera.scroll.x, self.camera.scroll.y))
-        #self.screen.blit(self.envi.oak_tree_group, (self.camera.scroll.x, self.camera.scroll.y))
+        # self.screen.blit(self.envi.oak_tree_group, (self.camera.scroll.x, self.camera.scroll.y))
 
         for x in range(self.envi.gridlength_x):
-            for y in range (self.envi.gridlength_y):
-                render_coord = self.envi.envi[x][y]["render_coord"]
+            for y in range(self.envi.gridlength_y):
 
+                render_coord = self.envi.envi[x][y]["render_coord"]
                 """Grid rendering"""
                 # Rectangle grid node
-                #node = self.envi.envi[x][y]["node_rect"]
-                #rect = pg.Rect(node[0][0], node[0][1], tile_size, tile_size)
-                #pg.draw.rect(self.screen, (255,255,255), rect, 1) # Outline of grid colour
+                # node = self.envi.envi[x][y]["node_rect"]
+                # rect = pg.Rect(node[0][0], node[0][1], tile_size, tile_size)
+                # pg.draw.rect(self.screen, (255,255,255), rect, 1) # Outline of grid colour
 
                 # Isometric grid node
-                #isonode = self.envi.envi[x][y]["node_poly"]
-                #isonode = [(x + self.width / 2, y + self.height / 16) for x, y in isonode]
-                #pg.draw.polygon(self.screen, (0,0,0), isonode, 1) #Outline colour of the grid frame.
+                # isonode = self.envi.envi[x][y]["node_poly"]
+                # isonode = [(x + self.width / 2, y + self.height / 16) for x, y in isonode]
+                # pg.draw.polygon(self.screen, (0,0,0), isonode, 1) #Outline colour of the grid frame.
 
                 # Isometric topdown grid node
                 # isonodeTD = self.envi.envi[x][y]["nodeTD_poly"]
@@ -126,19 +114,28 @@ class Sim():
                 # pg.draw.polygon(self.screen, (255, 255, 255), isonodeTD, 1)  # Outline colour of the grid frame.
 
                 """"Singular rendering"""
+                # # Tree rendering
+                entity = self.envi.envi[x][y]["entity"]
+
+                now = pg.time.get_ticks()
+                if now - self.cooldown > (day_length/2):
+                    r = random.randint(1, 2)
+                    if r != 2:
+                        entity = "oak_tree"
+                    else:
+                        entity = "empty"
+                    self.cooldown = now
 
                 # Initial rendering of trees
-                # entity = self.envi.envi[x][y]["entity"]
-                # if entity != "empty":
-                #    self.screen.blit(self.envi.node[entity], (render_coord[0] + self.envi.grass_group.get_width() / 2 + self.camera.scroll.x,
-                #                                              render_coord[1] + self.height/48 + self.camera.scroll.y))
-
-                # Generating new trees
-                if new_entity == "oak_tree":
-                    self.screen.blit(self.envi.node[new_entity],
+                if entity != "empty":
+                    self.screen.blit(self.envi.node[entity],
                                      (render_coord[0] + self.envi.grass_group.get_width() / 2 + self.camera.scroll.x,
                                       render_coord[1] + self.height / 48 + self.camera.scroll.y))
 
-
+                # Generating new trees
+                # if new_entity == "oak_tree":
+                #     self.screen.blit(self.envi.node[new_entity],
+                #                      (render_coord[0] + self.envi.grass_group.get_width() / 2 + self.camera.scroll.x,
+                #                       render_coord[1] + self.height / 48 + self.camera.scroll.y))
 
         pg.display.flip()

@@ -7,5 +7,5 @@ night = (33, 48, 61)
 # collection in the form of list
 sky_group = [day, night]
 
-# colorkeys
+# colour keys
 black = (0, 0, 0)

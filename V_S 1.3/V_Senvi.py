@@ -45,7 +45,6 @@ class Envi():
         # Starting up an environment
         self.envi = self.create_envi()
 
-
     # Function for creating an environment.
     def create_envi(self):
         envi = []
@@ -86,18 +85,22 @@ class Envi():
 
 
         # Random tile selection based of number generated
-
         r = random.randint(1, 100)
-        perlin = 100 * noise.pnoise2(grid_x / self.perlin_scale, grid_y / self.perlin_scale)
-        if (perlin >= self.ran_upper_p) or (perlin <= self.ran_lower_p):
+        # perlin = 100 * noise.pnoise2(grid_x / self.perlin_scale, grid_y / self.perlin_scale)
+        # if (perlin >= self.ran_upper_p) or (perlin <= self.ran_lower_p):
+        #     entity = "oak_tree"
+        # else:
+        #     if r < 1:
+        #         entity = "oak_tree"
+        #     else:
+        #         entity = "empty"
+
+        # Using random generation without perlin
+        if r <= 2:
             entity = "oak_tree"
-
         else:
-            if r == 1:
-                entity = "oak_tree"
+            entity = "empty"
 
-            else:
-                entity = "empty"
         dictionary = {
             "grid": [grid_x, grid_y],
             "node_rect": rect,
@@ -125,8 +128,7 @@ class Envi():
     def loadimages(self):
         grass_node = pg.image.load("Images/grass node 3.0.png").convert_alpha()
         oak_tree = pg.image.load("Images/oak tree(outline).png").convert_alpha()
-        return {"grass_node": grass_node,
-                "oak_tree": oak_tree}
+        return {"grass_node": grass_node, "oak_tree": oak_tree}
 
 
 

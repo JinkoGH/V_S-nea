@@ -4,7 +4,7 @@ import pygame as py
 screen_size = (1600, 900)
 # Sizes
 tile_size = 32
-world_size = 50
+world_size = 100
 # Time durations
 day_length = 2000
 
