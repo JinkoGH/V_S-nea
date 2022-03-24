@@ -85,7 +85,7 @@ class Envi():
         # lower_p = random.randint(-35, -15)
 
         # Random tile selection based of number generated
-        #self.r = random.randint(1, 100)
+        self.r = random.randint(1, 100)
 
         perlin = 100 * noise.pnoise2(grid_x / self.perlin_scale, grid_y / self.perlin_scale)
         if (perlin >= self.ran_upper_p) or (perlin <= self.ran_lower_p):
@@ -93,6 +93,10 @@ class Envi():
         else:
             if self.r < 3:
                 entity = "oak_tree"
+            elif self.r < 2:
+                entity = "bush1"
+            elif self.r < 1:
+                entity = "rock1"
             else:
                 entity = "empty"
 
@@ -122,4 +126,7 @@ class Envi():
     def loadimages(self):
         grass_node = pg.image.load("Images/grass node 3.0.png").convert_alpha()
         oak_tree = pg.image.load("Images/oak tree(outline).png").convert_alpha()
-        return {"grass_node": grass_node, "oak_tree": oak_tree}
+        rock1 = pg.image.load("Images/rock1.png").convert_alpha()
+        bush1 = pg.image.load("Images/bush1.png").convert_alpha()
+        return {"grass_node": grass_node, "oak_tree": oak_tree, "rock1": rock1, "bush1": bush1}
+
