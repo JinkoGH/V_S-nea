@@ -91,11 +91,11 @@ class Envi():
         if (perlin >= self.ran_upper_p) or (perlin <= self.ran_lower_p):
             entity = "oak_tree"
         else:
-            if self.r < 3:
+            if self.r == 3:
                 entity = "oak_tree"
-            elif self.r < 2:
+            elif self.r == 2:
                 entity = "bush1"
-            elif self.r < 1:
+            elif self.r == 1:
                 entity = "rock1"
             else:
                 entity = "empty"

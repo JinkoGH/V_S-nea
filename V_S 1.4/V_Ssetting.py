@@ -6,7 +6,7 @@ screen_size = (1600, 900)
 tile_size = 32
 world_size = 50
 # Time durations
-day_length = 2000
+day_length = 300
 
 # Camera
 cam_speed = 10

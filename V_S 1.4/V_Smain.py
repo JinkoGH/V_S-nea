@@ -19,9 +19,9 @@ def Main():
     clock = pg.time.Clock()
 
     # Background music
-    bg_music1 = 'bg music 1.wav'
-    pg.mixer.music.load(bg_music1)
-    pg.mixer.music.play(-1)
+    # bg_music1 = 'bg music 1.wav'
+    # pg.mixer.music.load(bg_music1)
+    # pg.mixer.music.play(-1)
 
     # Linking Sim class
     sim = Sim(screen, clock)

@@ -3,6 +3,7 @@
 import random
 import pygame as pg
 import sys
+import itertools
 
 # Linking files and classes
 from V_Spic import *
@@ -24,11 +25,15 @@ class Sim():
 
         # Time variables
         self.timer = 0
-        self.grow_timer = 0
-
+        self.count = 0
 
         # Initial adjustable variable states
-        self.sky_colour = day
+        self.colours = itertools.cycle([day, night])
+
+        # colour reference points
+        self.base_colour = next(self.colours)
+        self.next_colour = next(self.colours)
+        self.current_colour = self.base_colour
 
     # Running function which allows functions in Sim to be looped under the main loop
     def run(self):
@@ -67,24 +72,38 @@ class Sim():
             cursor_state = False
         if cursor_state:
             self.camera.update()
-        now = pg.time.get_ticks()
-        if now - self.grow_timer > day_length:
-            self.envi.r = random.randint(1, 10)
-            self.grow_timer = now
-
 
     # Draw function
 
     def draw(self):
         # day and night cycle
-        self.screen.fill(self.sky_colour)
-        now = pg.time.get_ticks()
-        while (day_length - 100) <= (now - self.timer) <= day_length:
-            self.sky_colour = night
-            self.timer = now + (day_length * 2)  # timer is shifted 2x to be ahead of now
-        while (day_length - 100) <= (self.timer - now) <= day_length:
-            self.sky_colour = day
-            self.timer = now
+        # self.screen.fill(self.sky_colour)
+        # now = pg.time.get_ticks()
+        # while (day_length - 100) <= (now - self.timer) <= day_length:
+        #     self.sky_colour = night
+        #     self.timer = now + (day_length * 2)  # timer is shifted 2x to be ahead of now
+        # while (day_length - 100) <= (self.timer - now) <= day_length:
+        #     self.sky_colour = day
+        #     self.timer = now
+
+        # Initial adjustable variable states
+        colours = itertools.cycle([day, night])
+
+        # colour reference points
+        base_colour = next(colours)
+        next_colour = next(colours)
+        current_colour = base_colour
+        self.count += 1
+        if self.count < day_length:
+            current_colour = [x + (((y - x) / day_length) * self.count) for x, y in
+                             zip(pg.color.Color(base_colour), pg.color.Color(next_colour))]
+        else:
+            self.count = 1
+            base_colour = next_colour
+            next_colour = next(colours)
+
+        self.screen.fill(self.current_colour)
+
 
         """Visualisation"""
         # First 3 seconds with day length as 1 second long
@@ -134,10 +153,11 @@ class Sim():
                 #         entity = "empty"
                 #     self.cooldown = now
 
-                # Initial rendering of trees
+                # Rendering of non perlin affected objects
                 if entity != "empty":
                     self.screen.blit(self.envi.node[entity],
                                      (render_coord[0] + self.envi.grass_group.get_width() / 2 + self.camera.scroll.x,
                                       render_coord[1] + self.height / 48 + self.camera.scroll.y))
 
+        # Updating the screen after iteration
         pg.display.flip()
