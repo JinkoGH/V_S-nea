@@ -77,40 +77,17 @@ class Sim():
 
     def draw(self):
         # day and night cycle
-        # self.screen.fill(self.sky_colour)
-        # now = pg.time.get_ticks()
-        # while (day_length - 100) <= (now - self.timer) <= day_length:
-        #     self.sky_colour = night
-        #     self.timer = now + (day_length * 2)  # timer is shifted 2x to be ahead of now
-        # while (day_length - 100) <= (self.timer - now) <= day_length:
-        #     self.sky_colour = day
-        #     self.timer = now
-
-
-        # day and night cycle
 
         self.step += 1
         if self.step < day_length:
             self.current_colour = [x + (((y - x) / day_length) * self.step) for x, y in
                              zip(pg.color.Color(self.base_colour), pg.color.Color(self.next_colour))]
         else:
-            self.step = 1
+            self.step = 0
             self.base_colour = self.next_colour
             self.next_colour = next(self.colours)
 
         self.screen.fill(self.current_colour)
-
-
-        """Visualisation"""
-        # First 3 seconds with day length as 1 second long
-        # timer        now        day/night ~dif1  ~dif2
-        # timer = 0    now > 0    day       0     0
-        # timer = 0    now < 1000 day       1000  -1000
-        # timer = 3000 now > 1000 night     -2000 2000
-        # timer = 3000 now < 2000 night     -1000 1000
-        # timer = 2000 now > 2000 day       0     0
-        # timer = 2000 now < 3000 day       1000  -1000
-        # timer = 5000 now > 3000 night     -2000 2000
 
         """Group rendering"""
         self.screen.blit(self.envi.grass_group, (self.camera.scroll.x, self.camera.scroll.y))
